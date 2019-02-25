@@ -11,7 +11,7 @@ This data cleaning exercise was inspired by Tidy Tuesday (<https://github.com/rf
 Question: How long does it take to earn a doctorate degree?
 ===========================================================
 
-This week's Tidy Tuesday exercise linked to many datasets. The one used here is: "Median years to doctorate, by broad field of study: Selected years, 1992–2017". It reports the median number of years it takes to receive a doctorate, broken down by broad field of study, for selected years between 1992 and 2007. Years to doctorate is measured in three ways: 1) years since receiving a bachelor's degree, 2) years since starting the graduate program, and 3) years since starting the doctoral program. Median years since starting the doctoral program is only reported at the last timepoint (2017), so we'll ignore that data.
+This week's Tidy Tuesday exercise linked to many datasets. The one used here is: "Median years to doctorate, by broad field of study: Selected years, 1992–2017". It reports the median number of years it takes to receive a doctorate, broken down by broad field of study, for selected years between 1992 and 2017. Years to doctorate is measured in three ways: 1) years since receiving a bachelor's degree, 2) years since starting the graduate program, and 3) years since starting the doctoral program. Median years since starting the doctoral program is only reported at the last timepoint (2017), so we'll ignore that data.
 
 ``` r
 library(readxl)
