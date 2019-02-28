@@ -54,11 +54,19 @@ The Field of study and Time to degree information needs to be moved to the same 
 ``` r
 yr_to_phd_clean <- yr_to_phd %>% 
   rename(field_time = `Field of study and time to degree`) %>% 
+  # Use field_time to create two columns: One for field of study and another for measurement period.
+  # If field_time begins with "Since", we know it contains information about the period
+  # If field_time does not begin with "Since", we know it contains information about the field of study
   mutate(
     field = ifelse(str_detect(field_time, "^Since"), NA, field_time),
     period = ifelse(str_detect(field_time, "^Since"), field_time, NA)) %>% 
+  # Copy the field of study information into all empty cells below it, 
+  # stopping when you reach the next non-empty cell
   fill(field, .direction = "down") %>% 
+  # The rows that do not have information about the period contain no data - we can remove them
+  # (You can see this in the earlier peek at the dataset - these are the rows that are all NAs)
   filter(!is.na(period)) %>% 
+  # Convert fields with strings to factors, and correct spelling as needed
   mutate(
     field = as_factor(field),
     field = fct_recode(field,
@@ -69,6 +77,7 @@ yr_to_phd_clean <- yr_to_phd %>%
                         "Since completing bachelor's" = "Since bachelor's",
                         "Since starting doctoral program" = "Since starting doctoral programa")
   ) %>% 
+  # Remove field_time (it's now redundant) and arrange the variables in a nice order
   select(field, period, everything(), -field_time)
 
 yr_to_phd_clean %>% select(1:4) %>% head()
