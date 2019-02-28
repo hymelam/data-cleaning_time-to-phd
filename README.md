@@ -80,7 +80,8 @@ yr_to_phd_clean <- yr_to_phd %>%
   # Remove field_time (it's now redundant) and arrange the variables in a nice order
   select(field, period, everything(), -field_time)
 
-yr_to_phd_clean %>% select(1:4) %>% head()
+yr_to_phd_clean %>% select(1:4) %>% head() 
+# (All columns after the 4th are excluded only for display purposes - they are still in dataset)
 ```
 
     ## # A tibble: 6 x 4
@@ -97,6 +98,10 @@ yr_to_phd_clean %>% select(1:4) %>% head()
 
 ``` r
 yr_to_phd_long <- yr_to_phd_clean %>% 
+  # Need to create two new columns: 
+  # >> year (populated with the column names - 1992, etc.) 
+  # >> duration (populated with data from the cells below - 10.6, etc.)
+  # Field and period stay as they are
   gather(year, duration, -field, -period) %>% 
   mutate(
     year = as.integer(year),
